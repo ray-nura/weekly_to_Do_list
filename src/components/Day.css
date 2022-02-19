@@ -1,0 +1,32 @@
+.icons{
+    color: white;
+    width: 30px;
+    height: 30px;
+    margin-left: 15px;
+}
+ul .icons{
+    pointer-events: none;
+}
+button{
+    background-color: transparent;
+    border: none;
+}
+li{
+display: grid;
+grid-template-columns: 1fr 8fr 1fr 1fr 1fr;
+clear: right;
+}
+ul .active{
+    color: white;
+    font-style: oblique;
+
+}
+.done{
+    color: greenyellow;
+    font-style: oblique;
+    text-decoration: line-through;
+    opacity: 0.7;
+}
+ul p{
+    float: right;
+}
