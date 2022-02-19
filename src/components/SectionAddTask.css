@@ -6,58 +6,90 @@ section {
   z-index: 1;
   left: 20%;
   top: 15%;
-  min-height: 60%;
+  min-height: 50%;
   width: 60%;
   padding: 2rem;
   overflow: auto;
-  background-color: rgb(229, 228, 151);
-  background-color: rgb(196, 224, 222);
+  background-color: rgb(159, 229, 151);
+  background-image: linear-gradient(
+    0deg,
+    rgba(155, 107, 147, 0.969),
+    rgba(27, 73, 123)
+  );
   opacity: 0.95;
   text-align: center;
   border-radius: 30px;
+  opacity: 0.95;
+  text-align: center;
 }
-section .icons{
-  float: right;
-}
+
 section .newTaskinput {
-  width: 80%;
+  width: 70%;
   border: none;
   border-radius: 10px;
   padding: 10px 20px;
   margin-bottom: 30px;
   font-size: 30px;
+  color: blueviolet;
+  font-weight: bold;
+}
+section .addTaskIcon {
+  padding: 0;
+  margin-top: 30px;
+  margin-bottom: -30px;
+  margin-left: 10px;
+  cursor: pointer;
+  background: transparent;
+  color: white;
 }
 section .weekDay input {
   font-size: 36px;
-  border: none;
   width: 30px;
-}
-section .newTaskAddBtn {
   border: none;
-  font-size: 42px;
-  background: transparent;
-  color: aquamarine;
 }
-section .taskBtn {
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
+.weekDay {
+  color: aliceblue;
+  font-weight: bold;
 }
-section button {
-  background-color: #fff;
-  color: teal;
-  border: none;
-  border-radius: 10px;
-  padding: 5px 20px;
-  font-size: 18px;
-  margin: 20px 50px;
+.days-checkbox {
+  margin-left: 15px;
 }
-label {
-  width: 30px;
-  color: teal;
-  font-size: 24px;
+
+section .icons {
+  float: right;
 }
-input{
-    margin-top: 50px;
+/* time */
+input {
+  margin-top: 50px;
+  padding: 5px;
+}
+@media (max-width: 900px) {
+  section {
+    left: 2%;
+    top: 15%;
+    min-height: 50%;
+    width: 95%;
+    padding: 1rem;
+  }
+  section .newTaskinput {
+    width: 95%;
     padding: 5px;
+    margin-bottom: 10px;
+    font-size: 18px;
+  }
+  section .addTaskIcon {
+    margin-top: 10px;
+    margin-bottom: 0px;
+    margin-left: 0px;
+  }
+  section .weekDay input {
+    font-size: 36px;
+    width: 20px;
+  }
+  .days-checkbox {
+    margin-left: 5px;
+  }
+  input {
+    margin-top: 30px;
+  }
 }

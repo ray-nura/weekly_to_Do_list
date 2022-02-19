@@ -1,41 +1,46 @@
-input {
-  background-color: white;
-  border: none;
-  font-size: 18px;
-  height: 30px;
-  width: 200px;
-  border-radius: 10px;
-  padding: 15px;
-}
-
-input:focus {
-  outline: none;
-}
+.form{
+  margin: 30px;
+} 
 .todo-button {
-  background-color: rgb(91, 199, 100);
+  border-radius: 50px;
   border: none;
-  padding: 10px;
-  border-radius: 10px;
+  padding: 10px 35px;
+  background-color: rgba(52, 112, 146, 0.664);
   color: white;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: bold;
-  margin: 5px;
+  cursor:pointer;
 }
-.todo-button:hover{
+.todo-button:hover {
+  background-color: rgba(110, 168, 202, 0.664);
+}
+.themes {
+  border-radius: 10px;
+  padding: 0.6rem;
+  color: whitesmoke;
+  background-color: #628fab;
+  font-weight: bold;
+  font-size: 15px;
   cursor: pointer;
 }
-select {
-  border: none;
-  width: 200px;
-  border-radius: 10px;
-  color: rgb(91, 199, 100);
-  font-size: 16px;
-  padding: 7px;
-  margin: 5px;
+.label-select {
+  font-size: 20px;
+  color: teal;
+  margin: 10px;
 }
-label {
-  color: white;
-  font-size: 22px;
-  font-weight: bold;
-  margin-left: 40px;
+
+@media (max-width: 900px) {
+  .form{
+      margin: 10px;
+  } 
+  
+  .todo-button {
+      padding: 10px 25px;
+      font-size: 15px;
+      margin-right: 30px;
+  }
+  
+    .label-select {
+      display: none;
+    }
 }

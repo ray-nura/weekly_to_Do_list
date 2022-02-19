@@ -1,9 +1,8 @@
 import { Component } from "react";
 import "./App.css";
-import FormChooseTheme from "./components/FormChooseTheme"
+import FormChooseTheme from "./components/FormChooseTheme";
 import SectionAddTask from "./components/SectionAddTask";
 import Day from "./components/Day";
-
 import moonData from "./backgrounds/moonData";
 import flowersData from "./backgrounds/flowersData";
 import greenNatureData from "./backgrounds/greenNatureData";
@@ -15,33 +14,36 @@ class App extends Component {
     super();
     this.state = {
       bgImgTheme: moonData,
-      slideDay: '',
-      displayForm: 'none',
+      slideId: '',
+      displaySection: 'none',
     };
   }
 
+  handleSelectTheme=(e)=>{
+   const objOfThemes= {mountainData : mountainData,magicSkyData:magicSkyData,flowersData:flowersData,greenNatureData:greenNatureData,moonData:moonData}
+    this.setState({bgImgTheme:objOfThemes[e.target.value]})
+  }
+
   render() {
-    const { bgImgTheme, slideDay, displayForm, newTasksArray } = this.state;
-    console.log(displayForm);
+    const { slideId, bgImgTheme, displaySection} = this.state;
     return (
       <div className="main">
         <header>
           <h1>My Weekly Planner</h1>
         </header>
-
-        <FormChooseTheme setThemeImg={(imgArr) => this.setState({ bgImgTheme: imgArr })}
-          displaySelect={(block) => this.setState({ displayForm: block })} />
-
-        <SectionAddTask displayForm={displayForm} 
-        displaySelect={(none) => this.setState({ displayForm: none })}
-          // addTasks={(newTasks) => this.setState({ newTasksArray: newTasks })}
-           />
-
-        <Day slideDay={slideDay} theme={bgImgTheme} addActive={(day) => this.setState({ slideDay: day })}
+        <FormChooseTheme handleSelect={this.handleSelectTheme}
+           displaySectionAdd={(block) => this.setState({ displaySection: block })}
+        />
+        <SectionAddTask displaySection={displaySection}
+          displaySectionAdd={(none) => this.setState({ displaySection: none })}
+        />
+        <Day
+          slideId={slideId}
+          theme={bgImgTheme}
+          addActive={(id) => this.setState({ slideId: id })}
         />
       </div>
     );
   }
 }
-
 export default App;

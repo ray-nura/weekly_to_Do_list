@@ -1,32 +1,44 @@
-.icons{
+.icons {
     color: white;
     width: 30px;
     height: 30px;
     margin-left: 15px;
-}
-ul .icons{
+  }
+  ul .icons {
     pointer-events: none;
-}
-button{
+  }
+  button {
     background-color: transparent;
     border: none;
-}
-li{
-display: grid;
-grid-template-columns: 1fr 8fr 1fr 1fr 1fr;
-clear: right;
-}
-ul .active{
+  }
+  li {
+    display: grid;
+    grid-template-columns: 10fr 1fr 1fr 1fr;
+    clear: right;
+  
+  }
+  ul .active {
     color: white;
     font-style: oblique;
-
-}
-.done{
+  }
+  .done {
     color: greenyellow;
     font-style: oblique;
     text-decoration: line-through;
     opacity: 0.7;
-}
-ul p{
+  }
+  ul p {
     float: right;
-}
+  }
+  .checked {
+    text-decoration: line-through;
+    opacity: 0.7;
+    font-style: italic;
+    color: greenyellow;
+    font-weight: bolder;
+  }
+  hr{
+    margin: 0;
+    padding: 0;
+  }
+  

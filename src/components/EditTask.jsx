@@ -1,17 +1,24 @@
-import React, { Component } from 'react';
+import React , { useState } from "react";
 import "../App.css";
-import Count from "./Count";
 import "./Day.css";
-import FilterTask from "./FilterTask";
-import Ul_taskDay from "./Ul_taskDay";
 
-const Day = (props) =>{
-   
-    return ( <div className="editTask">
-        <input type="text" required value={}
-              name={name} value={name} onChange={handleNewTaskValue}/>
-               <button type="submit">Save</button>
-    </div>
-        );
+export default function EditTask(props) {
+  const [name, setName] = useState("");
+  const changeValue = (e) => { 
+      setName(e.target.value)
 }
-export default Day;
+const saveTask = (e)=>{
+    let ids = e.target.id
+    name === '' ? alert('Your Task is Empty!') : props.saveEdit(ids, name);
+setName('')
+}
+
+  return (
+    <div className="editTask" style={{ display: `${props.displayEditTask}` }}  >
+        <input type="text" id={props.idObj} placeholder={props.valObj} required
+        value={name} onChange={changeValue}/>
+       <button className="editTaskBtn" type="submit" id={props.idObj} onClick={saveTask}>Save</button>
+
+    </div>
+  )
+}

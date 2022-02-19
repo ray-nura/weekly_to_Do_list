@@ -1,21 +1,22 @@
 import React, { useState }  from "react";
-import "../App.css";
 import { nanoid } from "nanoid";
+import AddTaskIcon from "@mui/icons-material/AddTask";
+import CloseIcon from '@mui/icons-material/Close';
 import "../App.css";
 import "./SectionAddTask.css";
-import CloseIcon from '@mui/icons-material/Close';
+import { task } from "../data/taskData";
 
-
-const SectionAddTask = (props) =>{
+const SectionAddTask = (props) => {
   let daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday",];
+
   const [taskArr, setTaskArr] = useState([
-    {"id": "01", "day": "Sunday", "time": "", "task": "","data": "", "active": false },
+    {"id": "01","day": "Sunday", "time": "", "task": "","data": "", "active": false },
     {"id": "02","day": "Monday", "time": "", "task": "", "data": "", "active": false},
-    {"id": "03","day": "Tuesday","time": "", "task": "","data": "", "active": false},
-    {"id": "04", "day": "Wednesday","time": "","task": "task", "data": "","active": false},
-    {"id": "05","day": "Thursday","time": "", "task": "some task Thursday", "data": "","active": false},
-    {"id": "06","day": "Friday","time": "","task": "some task Friday", "data": "", "active": false},
-    {"id": "07","day": "Saturday","time": "","task": "some task Saturday", "data": "", "active": false}
+    {"id": "03","day": "Tuesday", "time": "", "task": "","data": "", "active": false},
+    {"id": "04","day": "Wednesday", "time": "","task": "", "data": "","active": false},
+    {"id": "05","day": "Thursday", "time": "", "task": "", "data": "","active": false},
+    {"id": "06","day": "Friday", "time": "","task": "", "data": "", "active": false},
+    {"id": "07","day": "Saturday", "time": "","task": "", "data": "", "active": false}
   ]);
   const [name, setName] = useState("");
   const [time, setTime] = useState("");
@@ -27,52 +28,55 @@ const SectionAddTask = (props) =>{
       localStorage.setItem("weeklyTasks", JSON.stringify([ ...weeklyTasks,...newTasks]));
     } else {
       weeklyTasks = JSON.parse(localStorage.getItem("weeklyTasks"))
-      localStorage.setItem("weeklyTasks", JSON.stringify([ ...weeklyTasks,...newTasks]));
+      const checkTask = weeklyTasks.filter(t => t.task === name);
+      checkTask.length === 0 ? 
+      localStorage.setItem("weeklyTasks", JSON.stringify([ ...weeklyTasks,...newTasks])) 
+      : alert("You already have this Task!") ;
     }
 } 
   function handleClose(){
   const none="none"; 
-  props.displaySelect(none);
+  props.displaySectionAdd(none);
 }
   function handleSubmit(e) {
     e.preventDefault();
-    const newTasks = taskArr.filter((day)=> day.active ===true)
-    // props.addTasks(newTasks);
+    const newTasks = taskArr.filter((day)=> day.active ===true);
     setName('');
     setTime('');
     saveLocalTasks(newTasks);
-    handleClose()
+    handleClose();
   }
   function handleNewTaskValue(e) {
-    setName(e.target.value);
     let n = e.target.value;
-    const updateArr = taskArr.map((day) => day.task !== n ? {...day, task: name} : day )
+    setName(e.target.value);
+    const updateArr = taskArr.map((day) => day.task !== n ? {...day, task: n, id: "todo-" + nanoid()} : day );
     setTaskArr(updateArr);
   }
   function handleChangeTime(e) {
     setTime(e.target.value);
     let t = e.target.value;
-    const updateArr = taskArr.map((day) => day.time !== t ? {...day, time: time} : day )
+    const updateArr = taskArr.map((day) => day.time !== t ? {...day, time: t} : day );
     setTaskArr(updateArr);
   }
   function handleChange(e) {
     let v= e.target.value;
-    let d= new Date();
+    let d= new Date().toLocaleDateString();
     const updateArr = taskArr.map((day) => day.day === v ? {...day, active: !day.active, time: time, task: name, data: d, id: "todo-" + nanoid()} : day )
     setTaskArr(updateArr);
     // npm install nanoid  id: "todo-" + nanoid()
   }
-  
-    return (
-        <section style={{ display:`${props.displayForm}`}}>
-          <CloseIcon className="icons" fontSize="large" onClick={handleClose}/>
-          <form onSubmit={handleSubmit}>
-            <input type="text" className="newTaskinput" required placeholder="What needs to be done?"
-              name={name} value={name} onChange={handleNewTaskValue}/>
-            
-            <div className="weekDay">
-              
-            {daysOfWeek.map((dayOfWeek, index) => {
+
+  return (
+    <section style={{ display: `${props.displaySection}` }}>
+      <CloseIcon className="icons" sx={{ fontSize: 50 }} onClick={handleClose}/>
+      <form onSubmit={handleSubmit}>
+        <input type="text" className="newTaskinput" required placeholder="What needs to be done?" 
+        name={name} value={name} onChange={handleNewTaskValue}/>
+        <button type="submit">
+          <AddTaskIcon className="addTaskIcon" sx={{ fontSize: 80 }} onClick={props.addTaskToData}/>
+        </button>
+        <div className="weekDay">
+          {daysOfWeek.map((dayOfWeek, index) => {
             return (
               <>
                 <label className="days-checkbox" htmlFor={dayOfWeek}> {dayOfWeek.slice(0, 3)}</label>
@@ -80,14 +84,11 @@ const SectionAddTask = (props) =>{
               </>
             );
           })}
-            </div>
-            <input type="time" id="time" required name={time} value={time} onChange={handleChangeTime}/>
-            <div className="taskBtn">
-              <button type="submit">Add New Task</button>
-            </div>
-          </form>
-        </section>
-
-);
+        </div>
+        <input type="time" id="time" required name={time} value={time} onChange={handleChangeTime}/>
+      </form>
+    </section>
+  );
 };
 export default SectionAddTask;
+
